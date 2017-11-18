@@ -28,13 +28,24 @@ int main(void) {
 
 
 	if(num == 1){
+		int piece1,piece2;
 		cout<<"Pick your piece 1,2,3, or 4!"<<endl;
-		int piece;
-		cin>>piece;
-		p1 = new ComputerPlayer(piece);
+		cin>>piece1;
 		cout<<"Pick your piece 1,2,3, or 4!"<<endl;
-		cin>>piece;
-		p2 = new HumanPlayer(piece);
+		cin>>piece2;
+
+		while(piece1 == piece2){
+			cout<<"Sorry!! pieces must be different."<<endl;
+			cout<<"Try again."<<endl;
+
+			cout<<"Pick your piece 1,2,3, or 4!"<<endl;
+			cin>>piece1;
+			cout<<"Pick your piece 1,2,3, or 4!"<<endl;
+			cin>>piece2;
+		}
+
+		p1 = new ComputerPlayer(piece1);
+		p2 = new HumanPlayer(piece2);
 		Board *b = new Board(p1,p2);
 		b->startGame(*p1);
 		b->startGame(*p2);
@@ -56,13 +67,10 @@ int main(void) {
 			}
 
 			roll = d.roll();
-			cout<<"Player "<<p2->getName()<<" hit enter to roll!!"<<endl;
-			
-			if(cin.get() == '\n'){
-				cout<<"Player "<<p2->getName()<<" you rolled a "<<roll<<endl;
-				b->move(*p2,roll);
-				b->print();
-			}
+			cout<<"Player "<<p2->getName()<<" turn!!"<<endl;
+			cout<<"Player "<<p2->getName()<<" rolled a "<<roll<<endl;
+			b->move(*p2,roll);
+			b->print();
 
 			check1 = p1->checkWin();
 			check2 = p2->checkWin();
@@ -75,10 +83,10 @@ int main(void) {
 		cout<<"Pick your piece 1,2,3, or 4!"<<endl;
 		int piece;
 		cin>>piece;
-		p1 = new Players(piece);
+		p1 = new HumanPlayer(piece);
 		cout<<"Pick your piece 1,2,3, or 4!"<<endl;
 		cin>>piece;
-		p2 = new Players(piece);
+		p2 = new HumanPlayer(piece);
 		Board *b = new Board(p1,p2);
 		b->startGame(*p1);
 		b->startGame(*p2);

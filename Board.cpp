@@ -73,7 +73,8 @@ void Board::addPlayer(Players p,int i) { //takes in a player object and an index
 
 
 bool Board::isFinished(Players p,int index){
-	if(p.getPlaceBack() && index >= p.getFinish()){//and checks if the new index position is greater than or equal to the finish index
+	Players *temp = this->findPlayer(p.getName());
+	if(temp->getPlaceBack() && index >= temp->getFinish()){//and checks if the new index position is greater than or equal to the finish index
 		return true; //if true means the piece made it around the board
 	}
 	return false;
