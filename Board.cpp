@@ -73,7 +73,7 @@ void Board:: move(Players player, int roll) { //takes in a player and a roll amo
 			cout<<"Player "<<temp->getName()<<" you have "<<left<< " pieces left!! KEEP GOING!!"<<endl;
 		}
 	}
-	if(bArray[newPos].getSize() >= 2){. //The check if the size of the pieces array is greater than = to 2
+	if(bArray[newPos].getSize() >= 2){ //The check if the size of the pieces array is greater than = to 2
 		this->jump(*temp,newPos);       //Calls the jump function
 	}
 

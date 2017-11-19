@@ -1,1 +1,4 @@
-# Project3132
+Compile:
+    g++ *.cpp -o sorry
+Run:
+    ./sorry
