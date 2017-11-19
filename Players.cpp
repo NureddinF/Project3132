@@ -5,7 +5,6 @@
 
 Players:: Players() {
 	this->name = 0;
-	this->turn = 0;
 	this->amount = 0;
 }
 
@@ -33,8 +32,6 @@ Players:: Players(int name) {
 	d = new Dice();
 }
 
-
-
 void Players:: setName(int name) {
 	this->name = name;
 	if(name == 1){
@@ -57,14 +54,6 @@ void Players:: setName(int name) {
 
 int Players:: getName() {
 	return this->name;
-}
-
-void Players:: setTurn(int turn) {
-	this->turn = turn;
-}
-
-int Players:: getTurn() {
-	return this->turn;
 }
 
 Pieces Players::getPieces() {

@@ -13,28 +13,6 @@ Board:: Board(Players *p1,Players *p2) {
 	}
 }
 
-Board:: Board(Players *p1,Players *p2,Players *p3) { //Inititializes 3 player objects
-	this->player1 = p1;
-	this->player2 = p2;
-	this->player3 = p3;
-	this->size = 32;
-	bArray = new Blocks[size];
-	for (int i = 0; i < size; i++) {
-		bArray[i].setID(i);
-	}
-}
-Board:: Board(Players *p1,Players *p2,Players *p3,Players *p4) { //initializes 4 player objects
-	this->player1 = p1;
-	this->player2 = p2;
-	this->player3 = p3;
-	this->player4 = p4;
-	this->size = 32;
-	bArray = new Blocks[size];
-	for (int i = 0; i < size; i++) {
-		bArray[i].setID(i);
-	}
-}
-
 Board:: ~Board() {
 	delete[] bArray;
 }
@@ -46,24 +24,14 @@ Players *Board::findPlayer(int name){ //Takes a name(1,2,3 or 4) and returns the
 	if(player2->getName() == name){
 		return player2;
 	}
-	if(player3->getName() == name){
-		return player3;
-	}
-	if(player4->getName() == name){
-		return player4;
-	}
 }
 
 int Board::getPosition(Players p){//Takes in a player object and finds its position on the boared and returns that index, -1 if not found
-	int k = 0;
-	// while (k<2) {
-		for (int i = 0; i < size; i++) {
-			if (bArray[i].getPiece().getPlayer() == p.getPieces().getPlayer()) {
-				return i;
-			}
+	for (int i = 0; i < size; i++) {
+		if (bArray[i].getPiece().getPlayer() == p.getPieces().getPlayer()) {
+			return i;
 		}
-	k++;
-	// }
+	}
 	return -1;
 }
 
@@ -105,11 +73,7 @@ void Board:: move(Players player, int roll) {
 			cout<<"Player "<<temp->getName()<<" you have "<<left<< " pieces left!! KEEP GOING!!"<<endl;
 		}
 	}
-	if(temp->checkWin()){
-		cout<<"Player "<<temp->getName()<<" YOU WINNN!!!"<<endl;
-
-	}
-	if(bArray[newPos].getSize() == 2){
+	if(bArray[newPos].getSize() >= 2){
 		this->jump(*temp,newPos);
 	}
 
@@ -127,10 +91,12 @@ void Board:: jump(Players player,int index){
 	Players *jumped = this->findPlayer(p.getPlayer());
 	bArray[index].removePiece(jumped->getPieces());
 	bArray[index].removePiece(temp->getPieces());
+	jumped->setPlaceBack(false);
 	this->startGame(*jumped);
+
+	int startCheck = bArray[jumped->getStart()].getSize();
 	bArray[index].addPiece(temp->getPieces());
 	cout<<"Player "<<temp->getName()<<" Jumped player "<<jumped->getName()<<", Player "<<jumped->getName()<<" is now back at start"<<endl;
-
 
 }
 void Board::startGame(Players p){ //takes a player object
@@ -148,9 +114,6 @@ Blocks* Board:: getBlocks(int id){
 }
 
 void Board:: print() {
-	// bArray[0].addPiece(player1->getPieces());
-	// bArray[0].addPiece(player2->getPieces());
-	// bArray[4].removePiece(player1->getPieces());
 	for (int i = 16; i < 25; i++) {
 		bArray[i].print();
 	}
@@ -162,20 +125,6 @@ void Board:: print() {
 		bArray[j+k].print();
 		cout<<endl;
 
-		// if(array[j].getPlayer() == 0 && array[j+k].getPlayer() == 0){
-		// 	cout<<"|   |\t\t    |   |"<<endl;
-		// }
-		// if(array[j].getPlayer() != 0 && array[j+k].getPlayer() !=0){
-		// 	cout<<"| "<<array[j].getPlayer()<<" |\t\t    | "<<array[j+k].getPlayer()<<" |"<<endl;
-		// }
-		// if(array[j].getPlayer() !=0 && array[j+k].getPlayer() == 0){
-		// 	cout<<"| "<<array[j].getPlayer()<<" |\t\t    |   |"<<endl;
-		// }
-		// if(array[j].getPlayer() == 0 && array[j+k].getPlayer() !=0) {
-		// 	cout<<"|   |\t\t    | "<<array[j+k].getPlayer()<<" |"<<endl;
-		// }
-		/*cout << "|" << (array[j] == 0?" ":array[j])<< "|" << "\t    " 
-		<< "|" << (array[j+k] == 0?" ":array[j+k]) << "|" << endl;*/
 		k += 2;
 	}
 	for (int l = 8; l >= 0; l--) {
@@ -184,6 +133,56 @@ void Board:: print() {
 	cout << endl;
 }
 
+void Board:: printDemo() {	//show all start and finish positions on board
+	for (int i = 16; i < 25; i++) {
+		if (i == 20) {
+			cout << "|S3|";
+		}
+		else if (i == 19){
+			cout << "|F3|";
+		}
+		else {
+			cout << "|  |";
+		}
+	}
+	cout << endl;
+	int k = 10;
+	for (int j = 15; j > 8; j--) {
+		if (j == 12) {
+			cout << "|S2|";
+		}
+		else if (j == 11){
+			cout << "|F2|";
+		}
+		else {
+			cout << "|  |";
+		}
+		cout<<"\t\t\t        ";
+		if (j+k == 28) {
+			cout << "|S4|";
+		}
+		else if (j+k == 27){
+			cout << "|F4|";
+		}
+		else {
+			cout << "|  |";
+		}
+		cout<<endl;
+		k += 2;
+	}
+	for (int l = 8; l >= 0; l--) {
+		if (l == 4) {
+			cout << "|S1|";
+		}
+		else if (l == 3){
+			cout << "|F1|";
+		}
+		else {
+			cout << "|  |";
+		}
+	}
+	cout << endl;
+}
 
 
 

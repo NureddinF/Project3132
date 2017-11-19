@@ -10,7 +10,6 @@ protected:
 	int name; 
 	int start;
 	int finish;
-	int turn;
 	Pieces *p;  
 	bool placeBack;
 	int amount;
@@ -20,22 +19,16 @@ public:
 	Players();
 	Players(int name);
 	
-
 	void setName(int name);
-	int getName();
-		
+	int getName();	
 	
 	int getStart();
 	int getFinish();
-
-	void setTurn(int turn);
-	int getTurn();
 
 	void setPieces(Pieces p);
 	Pieces getPieces();
 
 	bool checkWin();
-	void addPlayers();
 
 	void setPlaceBack(bool i);
 	bool getPlaceBack();

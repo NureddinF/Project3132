@@ -14,7 +14,6 @@ Blocks:: ~Blocks() {
 }
 
 void Blocks:: addPiece(Pieces piece) {
-	// cout<<this->size<<endl;
 	if(size > 2){
 		cout<<"Cannot add!"<<endl;
 	}
@@ -22,8 +21,6 @@ void Blocks:: addPiece(Pieces piece) {
 		pArray[size] = piece;
 		size++;
 	}
-	// cout<<size<<endl;
-	// cout<<pArray[0].getPlayer()<<endl;
 }
 
 void Blocks:: removePiece(Pieces piece) {
