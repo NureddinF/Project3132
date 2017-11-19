@@ -16,7 +16,8 @@ int main(void) {
 
 	Board *b;
 
-	Dice d = Dice(); 
+	Dice d = Dice();
+
 
 	cout<<"WELCOME TO SORRY!!"<<endl;
 	cout<<"   "<<endl;
@@ -31,7 +32,7 @@ int main(void) {
 		int piece1,piece2;
 		cout<<"Pick your piece 1,2,3, or 4!"<<endl;
 		cin>>piece1;
-		cout<<"Pick your piece 1,2,3, or 4!"<<endl;
+		cout<<"Pick a piece for the computer 1,2,3, or 4!"<<endl;
 		cin>>piece2;
 
 		while(piece1 == piece2){
@@ -40,7 +41,7 @@ int main(void) {
 
 			cout<<"Pick your piece 1,2,3, or 4!"<<endl;
 			cin>>piece1;
-			cout<<"Pick your piece 1,2,3, or 4!"<<endl;
+			cout<<"Pick a piece for the computer piece 1,2,3, or 4!"<<endl;
 			cin>>piece2;
 		}
 
@@ -55,7 +56,7 @@ int main(void) {
 		bool check1 = p1->checkWin();
 		bool check2 = p2->checkWin();
 		cin.ignore();
-		while(check1 != true || check2 != true){
+		while(check1 == false && check2 == false){
 
 			roll = d.roll();
 			
@@ -74,6 +75,8 @@ int main(void) {
 
 			check1 = p1->checkWin();
 			check2 = p2->checkWin();
+			cout<<"Ch1 "<<check1<<endl;
+			cout<<"Ch2 "<<check2<<endl;
 		}
 	}
 
@@ -96,7 +99,7 @@ int main(void) {
 		bool check1 = p1->checkWin();
 		bool check2 = p2->checkWin();
 		cin.ignore();
-		while(check1 != true || check2 != true){
+		while(check1 == false && check2 == false){
 
 			roll = d.roll();
 			
@@ -118,6 +121,9 @@ int main(void) {
 
 			check1 = p1->checkWin();
 			check2 = p2->checkWin();
+
+			cout<<"Ch1 "<<check1<<endl;
+			cout<<"Ch2 "<<check2<<endl;
 		}
 	}
 
@@ -138,7 +144,7 @@ int main(void) {
 		bool check1 = p1->checkWin();
 		bool check2 = p2->checkWin();
 		cin.ignore();
-		while(check1 != true || check2 != true){
+		while(check1 == false && check2 == false){
 
 			roll = d.roll();
 			
@@ -180,7 +186,7 @@ int main(void) {
 		bool check1 = p1->checkWin();
 		bool check2 = p2->checkWin();
 		cin.ignore();
-		while(check1 != true || check2 != true){
+		while(check1 == false && check2 == false){
 
 			roll = d.roll();
 			

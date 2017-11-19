@@ -14,8 +14,16 @@ Blocks:: ~Blocks() {
 }
 
 void Blocks:: addPiece(Pieces piece) {
-	pArray[size] = piece;
-	size++;
+	// cout<<this->size<<endl;
+	if(size > 2){
+		cout<<"Cannot add!"<<endl;
+	}
+	else{
+		pArray[size] = piece;
+		size++;
+	}
+	// cout<<size<<endl;
+	// cout<<pArray[0].getPlayer()<<endl;
 }
 
 void Blocks:: removePiece(Pieces piece) {
@@ -30,7 +38,7 @@ void Blocks:: removePiece(Pieces piece) {
 		}
 		
 	}
-	else if (pArray[1].getPlayer() == piece.getPlayer()) {
+	if (pArray[1].getPlayer() == piece.getPlayer()) {
 		pArray[1] = defaultP;
 	}
 	size--;
@@ -44,7 +52,6 @@ Pieces Blocks:: getPiece() {
 int Blocks:: getSize() {
 	return this->size;
 }
-
 
 void Blocks:: print() {
 	cout<<"| ";

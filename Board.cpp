@@ -113,8 +113,6 @@ void Board:: move(Players player, int roll) {
 		this->jump(*temp,newPos);
 	}
 
-	
-
 }
 
 void Board:: reachedEnd(Players player,int index){
@@ -128,7 +126,9 @@ void Board:: jump(Players player,int index){
 	Pieces p = bArray[index].getPiece();
 	Players *jumped = this->findPlayer(p.getPlayer());
 	bArray[index].removePiece(jumped->getPieces());
+	bArray[index].removePiece(temp->getPieces());
 	this->startGame(*jumped);
+	bArray[index].addPiece(temp->getPieces());
 	cout<<"Player "<<temp->getName()<<" Jumped player "<<jumped->getName()<<", Player "<<jumped->getName()<<" is now back at start"<<endl;
 
 
