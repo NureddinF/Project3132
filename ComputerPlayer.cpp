@@ -3,6 +3,6 @@
 
 using namespace std;
 
-ComputerPlayer::ComputerPlayer(int name):Players(name){
+ComputerPlayer::ComputerPlayer(int name):Players(name){ //inherits from the players constructor
 
 }

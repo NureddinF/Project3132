@@ -4,7 +4,7 @@
 
 class Pieces {
 protected:
-	int player;
+	int player; //the name of the player
 	int amount;
 public:
 	Pieces();

@@ -7,13 +7,13 @@ using namespace std;
 
 class Players {
 protected:
-	int name; 
-	int start;
-	int finish;
-	Pieces *p;  
-	bool placeBack;
-	int amount;
-	Dice *d;
+	int name; //name of the player (1,2,3, or 4)
+	int start; //start index for the player
+	int finish; //finish index of the player
+	Pieces *p;   //Pieces object
+	bool placeBack; //boolean variable, it is true only when the piece reaches th eend of the board and gets places back
+	int amount; //amount of pieces corresponding the a player (4)
+	Dice *d; //Players dice object
 
 public:
 	Players();

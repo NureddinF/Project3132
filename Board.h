@@ -6,10 +6,10 @@
 
 class Board {
 protected:
-	Blocks *bArray;
-	int size;
-	Players *player1; 
-	Players *player2;
+	Blocks *bArray; //array of blocks objects
+	int size; 		
+	Players *player1; //player object
+	Players *player2; //player objects
 
 public:
 	Board();
@@ -21,7 +21,7 @@ public:
 	int getPosition(Players p);
 	void startGame(Players p);
 	bool isFinished(Players p,int index);
-	void move(Players p,int roll);
+	void move(Players p,int roll);		
 	void jump(Players player,int index);
 	void reachedEnd(Players player,int index);
 

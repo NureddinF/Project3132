@@ -5,12 +5,11 @@
 
 using namespace std;
 
-Dice::Dice(){
+Dice::Dice(){ 
 	srand(time(0));
-	//random = rand()%6;
 	
 }
 int Dice::roll(){ 
-	random = rand()%6;
-	return number[random];
+	random = rand()%6; //gets a random number from 0 to 6
+	return number[random]; //returns a number from the array at index random
 }

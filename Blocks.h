@@ -11,7 +11,7 @@ class Blocks {
 	protected:
 		int id;	//block's id
 		int size;	//the block's position on a board
-		Pieces *pArray;
+		Pieces *pArray; //array of Pieces objects
 	
 	public:
 		Blocks();

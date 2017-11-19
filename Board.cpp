@@ -2,13 +2,13 @@
 #include <iostream>
 using namespace std;
 
-Board:: Board(Players *p1,Players *p2) {
+Board:: Board(Players *p1,Players *p2) { //Constructor that takes in the two player objects.
 	
-	this->player1 = p1;
+	this->player1 = p1; //sets the the player object to the the player object defined in the board class
 	this->player2 = p2;
 	this->size = 32;
-	bArray = new Blocks[size];
-	for (int i = 0; i < size; i++) {
+	bArray = new Blocks[size]; //Initializes the blocks array
+	for (int i = 0; i < size; i++) { //Initializes each block with an id
 		bArray[i].setID(i); 
 	}
 }
@@ -49,53 +49,51 @@ bool Board::isFinished(Players p,int index){
 }
 
 
-void Board:: move(Players player, int roll) {
-	Players *temp = this->findPlayer(player.getName());
-	int oldPos = this->getPosition(*temp);
-	int newPos = oldPos + roll;
-	bArray[oldPos].removePiece(temp->getPieces());
-	if(newPos > 31){
-		newPos = newPos - 32;
-		this->reachedEnd(*temp,newPos);
+void Board:: move(Players player, int roll) { //takes in a player and a roll amount
+	Players *temp = this->findPlayer(player.getName()); //initializes a temporary player that calls the find function to get the player
+	int oldPos = this->getPosition(*temp); 						//gets the position the piece is currently at
+	int newPos = oldPos + roll; 								//finds the new postion the piece should move to
+	bArray[oldPos].removePiece(temp->getPieces()); 				//removes the pieces at the old position
+	if(newPos > 31){   											//Checks if the new position is greater than the size of the board
+		newPos = newPos - 32; 									//Subtracts the size of the board from the new position
+		this->reachedEnd(*temp,newPos); 						//calls the reachend function
 	}
-	if(bArray[newPos].getPiece().getPlayer() != temp->getName()){
+	if(bArray[newPos].getPiece().getPlayer() != temp->getName()){ //Check if the piece has been added at new position  
 		bArray[newPos].addPiece(temp->getPieces());
 	}
-	if(isFinished(player,newPos)){
-		bArray[newPos].removePiece(temp->getPieces());
-		this->startGame(*temp);
+	if(isFinished(player,newPos)){                               //Checks if the player is finished, means the player made it around the board
+		bArray[newPos].removePiece(temp->getPieces());           //removes the piece 
+		this->startGame(*temp);									//Calls start games which puts the next piece on the board at their start position
 		newPos = temp->getStart();
-		int left = temp->getAmount() -1;
-		temp->setAmount(left);
-		temp->setPlaceBack(false);
-		cout<<"Player "<<temp->getName()<<" made it around the board!!"<<endl;
+		int left = temp->getAmount() -1;						//Decrements the amount of pieces left for the player
+		temp->setAmount(left);									//sets the amount to the player object
+		temp->setPlaceBack(false);								//sets place back to false, placeback is true when the pieces reached the end and had to be re added to the board
+		cout<<"Player "<<temp->getName()<<" made it around the board!!"<<endl;  
 		if(left != 0 ){
 			cout<<"Player "<<temp->getName()<<" you have "<<left<< " pieces left!! KEEP GOING!!"<<endl;
 		}
 	}
-	if(bArray[newPos].getSize() >= 2){
-		this->jump(*temp,newPos);
+	if(bArray[newPos].getSize() >= 2){. //The check if the size of the pieces array is greater than = to 2
+		this->jump(*temp,newPos);       //Calls the jump function
 	}
 
 }
 
 void Board:: reachedEnd(Players player,int index){
-	Players *temp = this->findPlayer(player.getName());
-	temp->setPlaceBack(true);
-	bArray[index].addPiece(temp->getPieces());
+	Players *temp = this->findPlayer(player.getName());//Finds the player
+	temp->setPlaceBack(true);							//sets place back to ture
+	bArray[index].addPiece(temp->getPieces());			//adds the piece
 }
 
 void Board:: jump(Players player,int index){
-	Players *temp = this->findPlayer(player.getName());
-	Pieces p = bArray[index].getPiece();
-	Players *jumped = this->findPlayer(p.getPlayer());
-	bArray[index].removePiece(jumped->getPieces());
-	bArray[index].removePiece(temp->getPieces());
-	jumped->setPlaceBack(false);
-	this->startGame(*jumped);
-
-	int startCheck = bArray[jumped->getStart()].getSize();
-	bArray[index].addPiece(temp->getPieces());
+	Players *temp = this->findPlayer(player.getName()); 
+	Pieces p = bArray[index].getPiece();				//gets the piece at the the index
+	Players *jumped = this->findPlayer(p.getPlayer()); //finds the player of that pieces and store the player as the player getting jumped
+	bArray[index].removePiece(jumped->getPieces());		//remove the pieces getting jumped
+	bArray[index].removePiece(temp->getPieces());		//remove the piece to ensure no duplicates
+	jumped->setPlaceBack(false);						//set place back to false
+	this->startGame(*jumped);							//put the jumped player back at its start position
+	bArray[index].addPiece(temp->getPieces());			//Add the piece back to the index
 	cout<<"Player "<<temp->getName()<<" Jumped player "<<jumped->getName()<<", Player "<<jumped->getName()<<" is now back at start"<<endl;
 
 }
@@ -104,7 +102,7 @@ void Board::startGame(Players p){ //takes a player object
 	bArray[start].addPiece(p.getPieces());
 }
 
-Blocks* Board:: getBlocks(int id){
+Blocks* Board:: getBlocks(int id){ //returns the block at the specified index
 	for(int i = 0; i < size; i++){
 		if (bArray[i].getID() == id) {
 			return &bArray[i];
@@ -113,7 +111,7 @@ Blocks* Board:: getBlocks(int id){
 	return nullptr;
 }
 
-void Board:: print() {
+void Board:: print() {  //prints the blocks in a square shape
 	for (int i = 16; i < 25; i++) {
 		bArray[i].print();
 	}
