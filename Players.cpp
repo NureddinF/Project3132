@@ -7,7 +7,6 @@ Players:: Players() {
 	this->name = 0;
 	this->turn = 0;
 	this->amount = 0;
-	p = new Pieces(name);
 }
 
 Players:: Players(int name) {
@@ -31,6 +30,7 @@ Players:: Players(int name) {
 	p = new Pieces(name);
 	this->amount = 4;
 	placeBack = false;
+	d = new Dice();
 }
 
 
@@ -101,5 +101,9 @@ int Players::getAmount(){
 
 void Players::setAmount(int x){
 	this->amount = x;
+}
+
+Dice Players:: getDice(){
+	return *d;
 }
 

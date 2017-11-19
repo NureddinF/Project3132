@@ -16,7 +16,6 @@ int main(void) {
 
 	Board *b;
 
-	Dice d = Dice();
 
 
 	cout<<"WELCOME TO SORRY!!"<<endl;
@@ -52,13 +51,13 @@ int main(void) {
 		b->startGame(*p2);
 		cout<<"Your pieces are now on your start blocks! GOOD LUCK!!"<<endl;
 		b->print();
-		int roll;
+		int roll,roll2;
 		bool check1 = p1->checkWin();
 		bool check2 = p2->checkWin();
 		cin.ignore();
 		while(check1 == false && check2 == false){
 
-			roll = d.roll();
+			roll = p1->getDice().roll();
 			
 			cout<<"Player "<<p1->getName()<<" hit enter to roll!!"<<endl;
 			if(cin.get() == '\n'){
@@ -67,10 +66,10 @@ int main(void) {
 				b->print();
 			}
 
-			roll = d.roll();
+			roll2 = p2->getDice().roll();
 			cout<<"Player "<<p2->getName()<<" turn!!"<<endl;
 			cout<<"Player "<<p2->getName()<<" rolled a "<<roll<<endl;
-			b->move(*p2,roll);
+			b->move(*p2,roll2);
 			b->print();
 
 			check1 = p1->checkWin();
@@ -101,7 +100,7 @@ int main(void) {
 		cin.ignore();
 		while(check1 == false && check2 == false){
 
-			roll = d.roll();
+			// roll = d.roll();
 			
 			cout<<"Player "<<p1->getName()<<" hit enter to roll!!"<<endl;
 			if(cin.get() == '\n'){
@@ -110,7 +109,7 @@ int main(void) {
 				b->print();
 			}
 
-			roll = d.roll();
+			// roll = d.roll();
 			cout<<"Player "<<p2->getName()<<" hit enter to roll!!"<<endl;
 			
 			if(cin.get() == '\n'){
@@ -146,7 +145,7 @@ int main(void) {
 		cin.ignore();
 		while(check1 == false && check2 == false){
 
-			roll = d.roll();
+			// roll = d.roll();
 			
 			cout<<"Player "<<p1->getName()<<" hit enter to roll!!"<<endl;
 			if(cin.get() == '\n'){
@@ -155,7 +154,7 @@ int main(void) {
 				b->print();
 			}
 
-			roll = d.roll();
+			// roll = d.roll();
 			cout<<"Player "<<p2->getName()<<" hit enter to roll!!"<<endl;
 			
 			if(cin.get() == '\n'){
@@ -188,7 +187,7 @@ int main(void) {
 		cin.ignore();
 		while(check1 == false && check2 == false){
 
-			roll = d.roll();
+			// roll = d.roll();
 			
 			cout<<"Player "<<p1->getName()<<" hit enter to roll!!"<<endl;
 			if(cin.get() == '\n'){
@@ -197,7 +196,7 @@ int main(void) {
 				b->print();
 			}
 
-			roll = d.roll();
+			// roll = d.roll();
 			cout<<"Player "<<p2->getName()<<" hit enter to roll!!"<<endl;
 			
 			if(cin.get() == '\n'){
